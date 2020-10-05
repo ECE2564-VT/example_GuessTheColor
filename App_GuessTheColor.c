@@ -45,8 +45,8 @@ int main(void)
     // your main FSM function over and over.
     while (true)
     {
-        App_GuessTheColor_loop(&app, &hal);
-        HAL_refresh(&hal);
+        App_GuessTheColor_loop(&app, &hal);  //update my program, application state, output
+        HAL_refresh(&hal); // check the inputs
     }
 }
 
@@ -121,7 +121,7 @@ void App_GuessTheColor_showTitleScreen(GFX* gfx_p)
 {
 
     GFX_clear(gfx_p);
-    Graphics_drawImage((const Graphics_Context *)gfx_p, &colors8BPP_UNCOMP, 0, 0);
+    Graphics_drawImage(&gfx_p->context, &colors8BPP_UNCOMP, 0, 0);
 
     GFX_print(gfx_p, "Guess the RGB color  ", 0, 0);
     GFX_print(gfx_p, "---------------------", 1, 0);

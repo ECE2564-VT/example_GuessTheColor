@@ -14,9 +14,11 @@ GFX GFX_construct(uint32_t defaultForeground, uint32_t defaultBackground)
     gfx.defaultForeground = defaultForeground;
     gfx.defaultBackground = defaultBackground;
 
+    // initializing the display
     Crystalfontz128x128_Init();
     Crystalfontz128x128_SetOrientation(LCD_ORIENTATION_UP);
 
+    // setting up the graphics
     Graphics_initContext(&gfx.context, &g_sCrystalfontz128x128, &g_sCrystalfontz128x128_funcs);
     Graphics_setFont(&gfx.context, &g_sFontFixed6x8);
 
