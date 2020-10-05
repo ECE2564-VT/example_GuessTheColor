@@ -12,8 +12,8 @@
 #include <HAL/Graphics.h>
 #include <HAL/Timer.h>
 
-#define TITLE_SCREEN_WAIT   1000
-#define RESULT_SCREEN_WAIT  2000
+#define TITLE_SCREEN_WAIT   3000  //3 seconds
+#define RESULT_SCREEN_WAIT  3000  // 3 seconds
 
 #define NUM_TEST_OPTIONS    4
 #define NUM_RANDOM_NUMBERS  5

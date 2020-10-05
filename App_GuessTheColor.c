@@ -12,6 +12,10 @@
 #include <HAL/Timer.h>
 #include <App_GuessTheColor.h>
 
+extern const Graphics_Image colors8BPP_UNCOMP;
+extern const Graphics_Image sad8BPP_UNCOMP;
+extern const Graphics_Image happy8BPP_UNCOMP;
+
 /**
  * The main entry point of your project. The main function should immediately
  * stop the Watchdog timer, call the Application constructor, and then
@@ -115,9 +119,11 @@ void App_GuessTheColor_loop(App_GuessTheColor* app_p, HAL* hal_p)
  */
 void App_GuessTheColor_showTitleScreen(GFX* gfx_p)
 {
-    GFX_clear(gfx_p);
 
-    GFX_print(gfx_p, "Color Test           ", 0, 0);
+    GFX_clear(gfx_p);
+    Graphics_drawImage((const Graphics_Context *)gfx_p, &colors8BPP_UNCOMP, 0, 0);
+
+    GFX_print(gfx_p, "Guess the RGB color  ", 0, 0);
     GFX_print(gfx_p, "---------------------", 1, 0);
     GFX_print(gfx_p, "By: Leyla Nazhand-Ali", 2, 0);
     GFX_print(gfx_p, "Edit: Matthew Zhong  ", 3, 0);
@@ -154,6 +160,7 @@ void App_GuessTheColor_handleTitleScreen(App_GuessTheColor* app_p, HAL* hal_p)
     {
         app_p->state = INSTRUCTIONS_SCREEN;
         App_GuessTheColor_showInstructionsScreen(app_p, &hal_p->gfx);
+
     }
 }
 
@@ -271,7 +278,7 @@ void App_GuessTheColor_showInstructionsScreen(App_GuessTheColor* app_p, GFX* gfx
     GFX_print(gfx_p, "Instructions         ", 0, 0);
     GFX_print(gfx_p, "---------------------", 1, 0);
     GFX_print(gfx_p, "Guess the RGB mix.   ", 2, 0);
-    GFX_print(gfx_p, "Controls during test:", 3, 0);
+    GFX_print(gfx_p, "Controls during guessing:", 3, 0);
 
     GFX_print(gfx_p, "B1: Select choice    ", 5, 0);
     GFX_print(gfx_p, "B2: Move arrow       ", 6, 0);
@@ -295,7 +302,7 @@ void App_GuessTheColor_showGameScreen(App_GuessTheColor* app_p, GFX* gfx_p)
     GFX_print(gfx_p, "  Red                ", 2, 0);
     GFX_print(gfx_p, "  Green              ", 3, 0);
     GFX_print(gfx_p, "  Blue               ", 4, 0);
-    GFX_print(gfx_p, "  End Test           ", 5, 0);
+    GFX_print(gfx_p, "  End Guessing       ", 5, 0);
 
     GFX_print(gfx_p, "B1: Select choice    ", 7, 0);
     GFX_print(gfx_p, "B2: Move arrow       ", 8, 0);
@@ -349,8 +356,12 @@ void App_GuessTheColor_showResultScreen(App_GuessTheColor* app_p, HAL* hal_p)
     // Print the correct string based on if the user won or not
     if (match) {
         GFX_print(&hal_p->gfx, "Right!", 2, 0);
+        Graphics_drawImage((const Graphics_Context *)&hal_p->gfx, &happy8BPP_UNCOMP, 60, 60);
     }
     else {
         GFX_print(&hal_p->gfx, "Wrong!", 2, 0);
+        Graphics_drawImage((const Graphics_Context *)&hal_p->gfx, &sad8BPP_UNCOMP, 60, 60);
+
+
     }
 }
